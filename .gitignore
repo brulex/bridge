@@ -39,6 +39,7 @@ captures/
 .idea/gradle.xml
 .idea/assetWizardSettings.xml
 .idea/dictionaries
+.idea/modules.xml
 .idea/libraries
 .idea/caches
 
@@ -47,6 +48,14 @@ captures/
 #*.jks
 
 # External native build folder generated in Android Studio 2.2 and later
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+.DS_Store
+/build
+/captures
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
@@ -63,3 +72,4 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
