@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        android:layout_marginTop="8sp"
+        android:text="@string/setting_for_card_cost"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_the6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_the_6_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_the6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_for_lower" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_the7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_the_7_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_the7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_for_lower" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_the8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_the_8_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_the8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_for_lower" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_the9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_the_9_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_the9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_for_lower" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_the10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_the_10_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_the10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_the10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_Jack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_jack_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_Jack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_Jack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+
+            android:id="@+id/cost_spadesOfJack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_spades_of_jack_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_spadesOfJack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_spadesOfJack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_Queen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_queen_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_Queen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_Queen" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_SpadesOfQueen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_spades_of_queen_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_SpadesOfQueen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_SpadesOfQueen" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_King"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_king_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_King"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_King" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cost_Ace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/points_for_ace_cards"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/default_cost_Ace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/default_Ace" />
+    </LinearLayout>
+</LinearLayout>
