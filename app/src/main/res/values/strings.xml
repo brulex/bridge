@@ -3,8 +3,9 @@
     <string name="app_name">Bridge</string>
     <string name="start_new_game">New game</string>
     <string name="active_games">Active games</string>
-    <!--New game menu-->
     <string name="setting">Rule setting</string>
+    <string name="players">Players</string>
+    <!--New game menu-->
     <string name="game_name">Game name</string>
     <string name="change_mode">Change mode</string>
     <string name="points_to_finish">Points to finish</string>

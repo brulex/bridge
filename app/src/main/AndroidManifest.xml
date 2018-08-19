@@ -19,7 +19,14 @@
 
         <activity
             android:name=".View.NewGameMenu"
-            android:theme="@style/NewGameMenu">
+            android:theme="@style/NewGameMenu"
+            android:title="@string/setting">
+
+        </activity>
+        <activity
+            android:name=".View.AddPlayers"
+            android:theme="@style/NewGameMenu"
+            android:title="@string/players">
         </activity>
     </application>
 

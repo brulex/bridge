@@ -1,6 +1,7 @@
 package io.github.brulex.bridge.View;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -120,10 +121,8 @@ public class NewGameMenu extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_game_next:
-
-
-                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
-                        .show();
+                Intent newGame = new Intent(this, AddPlayers.class);
+                startActivity(newGame);
                 break;
             default:
                 break;
