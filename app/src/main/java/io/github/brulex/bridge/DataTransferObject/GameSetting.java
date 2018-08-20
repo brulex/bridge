@@ -1,4 +1,4 @@
-package io.github.brulex.bridge.Model;
+package io.github.brulex.bridge.DataTransferObject;
 
 import java.util.List;
 

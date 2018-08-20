@@ -1,4 +1,4 @@
-package io.github.brulex.bridge.Model;
+package io.github.brulex.bridge.DataTransferObject;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -139,13 +139,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         else return null;
     }
 
-    public void deleteGameSeting(int i_setting) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_GAME_RULE, KEY_I_SETTING + "=" + i_setting, null);
-        db.delete(TABLE_PLAYERS, KEY_I_SETTING + "=" + i_setting, null);
-        db.close();
-    }
-
     private List<Player> getAllPlayers(int i_setting) {
         List<Player> playerList = new ArrayList<Player>();
         String selectQuery = "SELECT  * FROM " + TABLE_PLAYERS +
@@ -161,4 +154,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return playerList;
     }
 
+    public void deleteGameSeting(int i_setting) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_GAME_RULE, KEY_I_SETTING + "=" + i_setting, null);
+        db.delete(TABLE_PLAYERS, KEY_I_SETTING + "=" + i_setting, null);
+        db.close();
+    }
 }

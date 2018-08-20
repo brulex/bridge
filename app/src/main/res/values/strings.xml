@@ -1,29 +1,35 @@
 <resources>
+
     <!--Main menu-->
     <string name="app_name">Bridge</string>
+
     <string name="start_new_game">New game</string>
     <string name="active_games">Active games</string>
-    <string name="setting">Rule setting</string>
-    <string name="players">Players</string>
+
+
     <!--New game menu-->
+    <string name="rule">Rule</string>
+    <string name="players">Players</string>
+    <!--Field for Rule fragment-->
     <string name="game_name">Game name</string>
     <string name="change_mode">Change mode</string>
     <string name="points_to_finish">Points to finish</string>
     <string name="lower_cards">Lower cards</string>
     <string name="spades_of_jack">Spades of Jack</string>
     <string name="spades_of_queen">Spades of Queen</string>
-    <string name="points_for_the_6_cards">the 6 default: 0</string>
-    <string name="points_for_the_7_cards">Points for the 7 cards</string>
-    <string name="points_for_the_8_cards">Points for the 8 cards</string>
-    <string name="points_for_the_9_cards">Points for the 9 cards</string>
-    <string name="points_for_the_10_cards">Points for the 10 cards</string>
-    <string name="points_for_jack_cards">Points for Jack cards</string>
-    <string name="points_for_spades_of_jack_cards">Points for spades of Jack cards</string>
-    <string name="points_for_queen_cards">Points for Queen cards</string>
-    <string name="points_for_spades_of_queen_cards">Points for spades of Queen cards</string>
-    <string name="points_for_king_cards">Points for King cards</string>
-    <string name="points_for_ace_cards">Points for Ace cards</string>
+    <string name="points_for_the_6_cards">the 6</string>
+    <string name="points_for_the_7_cards">the 7</string>
+    <string name="points_for_the_8_cards">the 8</string>
+    <string name="points_for_the_9_cards">the 9</string>
+    <string name="points_for_the_10_cards">the 10</string>
+    <string name="points_for_jack_cards">Jack</string>
+    <string name="points_for_spades_of_jack_cards">Spades of Jack</string>
+    <string name="points_for_queen_cards">Queen</string>
+    <string name="points_for_spades_of_queen_cards">Spades of Queen</string>
+    <string name="points_for_king_cards">King</string>
+    <string name="points_for_ace_cards">Ace</string>
     <!--default values for cards-->
+    <string name="setting_for_card_cost">Setting for card cost:</string>
     <string name="default_for_lower">default: 0</string>
     <string name="default_the10">default: 10</string>
     <string name="default_Jack">default: 10</string>
@@ -32,7 +38,10 @@
     <string name="default_SpadesOfQueen">default: 50</string>
     <string name="default_King">default: 10</string>
     <string name="default_Ace">default: 10</string>
-    <string name="setting_for_card_cost">Setting for card cost:</string>
-    <string name="next">Next</string>
 
+    <!--Field for Rule fragment-->
+    <string name="new_player">New Player</string>
+    <string name="nickname">Your nickname</string>
+    <!-- Buttons in toolbar-->
+    <string name="start">Start</string>
 </resources>
