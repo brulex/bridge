@@ -1,12 +1,15 @@
 package io.github.brulex.bridge.DataTransferObject;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -20,11 +23,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //    -----------------------------------------------------------------------
     private static final String KEY_I_SETTING = "i_setting";
     private static final String KEY_GAME_NAME = "game_name";
+    private static final String KEY_DATA = "data";
+    private static final String KEY_POINTS_TO_FINISH = "points_to_finish";
     private static final String KEY_FLAG_L = "flag_lower_card";
     private static final String KEY_FLAG_SJ = "flag_spades_jack";
     private static final String KEY_FLAG_SQ = "flag_spades_queen";
     private static final String KEY_FLAG_PC = "flag_point_change";
-    private static final String KEY_CURRENT_ROUND = "flag_point_change";
+    private static final String KEY_CURRENT_ROUND = "flag_current_round";
     private static final String KEY_6 = "the6";
     private static final String KEY_7 = "the7";
     private static final String KEY_8 = "the8";
@@ -44,7 +49,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_NICKNAME = "nickname";
     private static final String KEY_POINTS = "points";
 
-
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -54,6 +58,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_GAME_RULE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME_RULE + "("
                 + KEY_I_SETTING + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_GAME_NAME + " VARCHAR NOT NULL,"
+                + KEY_DATA + " VARCHAR NOT NULL,"
+                + KEY_POINTS_TO_FINISH + " INTEGER NOT NULL,"
                 + KEY_CURRENT_ROUND + " INTEGER NOT NULL,"
                 + KEY_FLAG_L + " INTEGER NOT NULL,"
                 + KEY_FLAG_SJ + " INTEGER NOT NULL,"
@@ -70,13 +76,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_SQ + " INTEGER NOT NULL,"
                 + KEY_K + " INTEGER NOT NULL,"
                 + KEY_A + " INTEGER NOT NULL"
-                +")";
+                + ")";
         String CREATE_PLAYERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PLAYERS + "("
                 + KEY_I_PLAYER + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-                + KEY_I_SETTING + "INTEGER NOT NULL,"
-                + KEY_NICKNAME + "INTEGER NOT NULL,"
-                + KEY_POINTS + "INTEGER NOT NULL"
-                +")";
+                + KEY_I_SETTING + " INTEGER NOT NULL,"
+                + KEY_NICKNAME + " INTEGER NOT NULL,"
+                + KEY_POINTS + " INTEGER NOT NULL"
+                + ")";
         db.execSQL(CREATE_GAME_RULE_TABLE);
         db.execSQL(CREATE_PLAYERS_TABLE);
     }
@@ -88,11 +94,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addRuleSetting(GameSetting ruleSetting) {
+    public void addNewGame(GameSetting ruleSetting) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+//        new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(Calendar.getInstance().getTime())
         values.put(KEY_GAME_NAME, ruleSetting.getGame_name());
+        values.put(KEY_DATA, "2018");
         values.put(KEY_CURRENT_ROUND, ruleSetting.getCurrent_round());
+        values.put(KEY_POINTS_TO_FINISH, ruleSetting.getPoints_to_finish());
         values.put(KEY_FLAG_L, ruleSetting.getFlag_lower_card() ? 1 : 0);
         values.put(KEY_FLAG_SJ, ruleSetting.getFlag_spades_jack() ? 1 : 0);
         values.put(KEY_FLAG_SQ, ruleSetting.getFlag_spades_queen() ? 1 : 0);
@@ -108,56 +117,99 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_SQ, ruleSetting.getCost_Spades_of_Queen());
         values.put(KEY_K, ruleSetting.getCost_King());
         values.put(KEY_A, ruleSetting.getCost_Ace());
-        db.insert(TABLE_GAME_RULE, null, values);
+        long i_setting = db.insert(TABLE_GAME_RULE, null, values);
+        addPlayerList(ruleSetting.getPlayers(), i_setting);
         db.close();
     }
 
+    private void addPlayerList(ArrayList<Player> players, long i_setting ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        for (Player i : players) {
+            ContentValues values = new ContentValues();
+            values.put(KEY_I_SETTING, i_setting);
+            values.put(KEY_NICKNAME, i.getNickname());
+            values.put(KEY_POINTS, i.getPoints());
+            db.insert(TABLE_PLAYERS, null, values);
+        }
+        db.close();
+    }
 
     public GameSetting getGameSetting(int i_setting) {
         SQLiteDatabase db = this.getReadableDatabase();
         GameSetting ruleSetting;
         String selectQuery = "SELECT * " +
-                "FROM " + TABLE_GAME_RULE +
-                "WHERE" + KEY_I_SETTING +"="+i_setting;
+                " FROM " + TABLE_GAME_RULE +
+                " WHERE " + KEY_I_SETTING + " = " + i_setting;
 
-        Cursor cursor = db.rawQuery(selectQuery,null);
-        if (cursor != null){
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor != null) {
             cursor.moveToFirst();
-            List<Player> playerList = getAllPlayers(cursor.getInt(0));
-            return new GameSetting(
-                    cursor.getInt(0), cursor.getString(1), cursor.getInt(2),
-                    cursor.getInt(3) == 1 ,
-                    cursor.getInt(4) == 1 ,
-                    cursor.getInt(5) == 1 ,
-                    cursor.getInt(6) == 1 ,
-                    cursor.getInt(7), cursor.getInt(8), cursor.getInt(9),
-                    cursor.getInt(10), cursor.getInt(11), cursor.getInt(12),
-                    cursor.getInt(13), cursor.getInt(14), cursor.getInt(15),
-                    cursor.getInt(16), cursor.getInt(17), playerList
-            );
-        }
-        else return null;
+            return getGame(cursor);
+        } else return null;
+    }
+int getInt(Cursor c, String key){
+        return c.getInt(c.getColumnIndex(key));
+    }
+    String getString(Cursor c, String key){
+        return c.getString(c.getColumnIndex(key));
+    }
+    private GameSetting getGame(Cursor cursor){
+
+        GameSetting gameSetting = new GameSetting();
+        gameSetting.setI_setting(getInt(cursor,KEY_I_SETTING));
+        gameSetting.setGame_name(getString(cursor,KEY_GAME_NAME));
+        gameSetting.setPoints_to_finish(getInt(cursor,KEY_POINTS_TO_FINISH));
+        gameSetting.setCurrent_round(getInt(cursor,KEY_CURRENT_ROUND));
+        gameSetting.setFlag_lower_card(getInt(cursor,KEY_FLAG_L) == 1);
+        gameSetting.setFlag_spades_jack(getInt(cursor,KEY_FLAG_SJ) == 1);
+        gameSetting.setFlag_spades_queen(getInt(cursor,KEY_FLAG_SQ) == 1);
+        gameSetting.setFlag_point_change(getInt(cursor,KEY_FLAG_PC) == 1);
+        gameSetting.setCost_the6(getInt(cursor,KEY_6));
+        gameSetting.setCost_the7(getInt(cursor,KEY_7));
+        gameSetting.setCost_the8(getInt(cursor,KEY_8));
+        gameSetting.setCost_the9(getInt(cursor,KEY_9));
+        gameSetting.setCost_the10(getInt(cursor,KEY_10));
+        gameSetting.setCost_Jack(getInt(cursor,KEY_J));
+        gameSetting.setCost_Spades_of_Jack(getInt(cursor,KEY_SJ));
+        gameSetting.setCost_Queen(getInt(cursor,KEY_Q));
+        gameSetting.setCost_Spades_of_Queen(getInt(cursor,KEY_SQ));
+        gameSetting.setCost_King(getInt(cursor,KEY_K));
+        gameSetting.setCost_Ace(getInt(cursor,KEY_A));
+        gameSetting.setPlayers(getAllPlayers(gameSetting.getI_setting()));
+        return gameSetting;
     }
 
-    private List<Player> getAllPlayers(int i_setting) {
-        List<Player> playerList = new ArrayList<Player>();
+    public ArrayList<GameSetting> getAllGames(){
+        ArrayList<GameSetting> gameSettings = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_GAME_RULE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                gameSettings.add(getGame(cursor));
+            } while (cursor.moveToNext());
+        }
+        return gameSettings;
+    }
+    private ArrayList<Player> getAllPlayers(int i_setting) {
+        ArrayList<Player> playerList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_PLAYERS +
-                "WHERE" + KEY_I_SETTING + "=" + i_setting;
+                " WHERE " + KEY_I_SETTING + " = " + i_setting;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                playerList.add(new Player(cursor.getString(3),cursor.getInt(4)));
+                playerList.add(new Player(getString(cursor,KEY_NICKNAME), getInt(cursor,KEY_POINTS)));
             } while (cursor.moveToNext());
         }
         return playerList;
     }
 
-    public void deleteGameSeting(int i_setting) {
+    public void deleteGameSetting(int i_setting) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_GAME_RULE, KEY_I_SETTING + "=" + i_setting, null);
-        db.delete(TABLE_PLAYERS, KEY_I_SETTING + "=" + i_setting, null);
+        db.delete(TABLE_GAME_RULE, KEY_I_SETTING + " = " + i_setting, null);
+        db.delete(TABLE_PLAYERS, KEY_I_SETTING + " = " + i_setting, null);
         db.close();
     }
 }

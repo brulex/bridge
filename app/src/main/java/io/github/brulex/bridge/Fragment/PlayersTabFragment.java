@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,63 +15,90 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import io.github.brulex.bridge.Adapter.PlayerListAdapter;
+import io.github.brulex.bridge.DataTransferObject.Player;
 import io.github.brulex.bridge.R;
 
-public class PlayersNewGameTabFragment extends AbstractFragment implements PlayerListAdapter.ItemClickListener{
-    FloatingActionButton addPlayer;
-    PlayerListAdapter adapter;
-    RecyclerView recyclerView;
-    ArrayList<String> animalNames;
+public class PlayersTabFragment extends AbstractFragment implements PlayerListAdapter.ItemClickListener{
+    private PlayerListAdapter adapter;
+    private RecyclerView recyclerView;
+    private ArrayList<Player> players;
 
-    public static PlayersNewGameTabFragment getInstance(Context context) {
+    public static PlayersTabFragment getInstance(Context context) {
         Bundle args = new Bundle();
-        PlayersNewGameTabFragment fragment = new PlayersNewGameTabFragment();
+        PlayersTabFragment fragment = new PlayersTabFragment();
         fragment.setArguments(args);
         fragment.setContext(context);
         fragment.setTitle(context.getString(R.string.players));
         return fragment;
     }
 
-    public void setContext(Context context) {
+    private void setContext(Context context) {
         this.context = context;
+    }
+
+    @Override
+    public boolean globalIsEmpty() {
+        return players.size() < 2;
+    }
+
+    @Override
+    public ArrayList<Player> getPlayerInfo() {
+        return players;
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Fview = inflater.inflate(R.layout.fragment_add_players, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_add_players, container, false);
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         // data to populate the RecyclerView with
-        animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
+        players = new ArrayList<>();
+        if(savedInstanceState != null) {
+            List<String> temp =  savedInstanceState.getStringArrayList("players");
+            assert temp != null;
+            for (String i : temp) {
+                players.add(new Player(i,0));
+            }
+        }
         // set up Floating button
-        FloatingActionButton floatingActionButton = Fview.findViewById(R.id.floating_action_button);
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
         floatingActionButton.setOnClickListener(onFloatingButtonClick);
         // set up adapter
-        adapter = new PlayerListAdapter(this.context, animalNames);
+        adapter = new PlayerListAdapter(getContext(), players);
         adapter.setClickListener(this);
         // set up the RecyclerView
-        recyclerView = Fview.findViewById(R.id.players_add_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
+        recyclerView = view.findViewById(R.id.players_add_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+    }
 
-        return Fview;
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ArrayList<String> temp =  new ArrayList<>();
+        for (Player i : players) {
+            temp.add(i.getNickname());
+        }
+        outState.putStringArrayList("players",temp);
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        animalNames.remove(position);
+        players.remove(position);
         adapter.notifyItemRemoved(position);
         recyclerView.scrollToPosition(position);
     }
 
-    private View.OnClickListener onFloatingButtonClick = new View.OnClickListener() {
+    private final View.OnClickListener onFloatingButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
@@ -85,9 +113,9 @@ public class PlayersNewGameTabFragment extends AbstractFragment implements Playe
                     .setPositiveButton("Save",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,int id) {
-                                    animalNames.add(userInput.getText().toString());
-                                    adapter.notifyItemInserted(animalNames.size());
-                                    recyclerView.scrollToPosition(animalNames.size());
+                                    players.add(new Player(userInput.getText().toString(),0));
+                                    adapter.notifyItemInserted(players.size());
+                                    recyclerView.scrollToPosition(players.size());
                                 }
                             })
                     .setNegativeButton("Cancel",

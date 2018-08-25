@@ -1,50 +1,57 @@
 package io.github.brulex.bridge.Fragment;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.amitshekhar.DebugDB;
+
+import java.util.Objects;
 
 import io.github.brulex.bridge.NewGameActivity;
 import io.github.brulex.bridge.R;
 
 public class MainMenuFragment extends AbstractFragment {
 
-    private Button b_newGame;
-    private Button b_activeGames;
-    private Fragment activeGamesMenu;
-
     public static final String TAG = "MainMenuFragment";
 
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        return v;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Fview = inflater.inflate(R.layout.fragment_main_menu, container, false);
-        b_newGame = Fview.findViewById(R.id.start_new_game_button);
-        b_activeGames = Fview.findViewById(R.id.active_games_button);
-        this.context = getContext();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button b_newGame = Objects.requireNonNull(getActivity()).findViewById(R.id.start_new_game_button);
+        Button b_activeGames = getActivity().findViewById(R.id.active_games_button);
         b_newGame.setOnClickListener(onClick);
         b_activeGames.setOnClickListener(onClick);
 
-        return Fview;
     }
 
-    private View.OnClickListener onClick = new View.OnClickListener() {
+    private final View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.start_new_game_button:
-                    Intent newGame = new Intent(context, NewGameActivity.class);
+                    Intent newGame = new Intent(getContext(), NewGameActivity.class);
                     startActivity(newGame);
                     break;
                 case R.id.active_games_button:
-//                    activeGamesMenu = new MainMenuFragment();
-//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                    fragmentTransaction.replace(R.id.mainMenu_fragment, activeGamesMenu,MainMenuFragment.TAG);
+                    DebugDB.getAddressLog();
+                    Fragment activeGamesMenu = new ActiveGamesFragment();
+                    FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+                    fragmentTransaction.replace(R.id.main_screen_container, activeGamesMenu, ActiveGamesFragment.TAG).commit();
                     break;
                 default:
                     break;

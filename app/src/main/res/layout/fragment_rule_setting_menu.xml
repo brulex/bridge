@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,6 +30,7 @@
                 android:ems="10"
                 android:hint="@string/game_name"
                 android:inputType="textPersonName"
+                android:selectAllOnFocus="false"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="53dp" />
 
@@ -40,7 +40,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/points_to_finish"
-                android:inputType="numberDecimal"
+                android:inputType="number"
+                android:maxLength="9"
+                android:selectAllOnFocus="false"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="115dp" />
 
@@ -48,6 +50,7 @@
                 android:id="@+id/flag_lower"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="9"
                 android:text="@string/lower_cards"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="40dp"
@@ -90,85 +93,77 @@
                 android:textSize="24sp" />
 
             <LinearLayout
-                android:id="@+id/cost_the6_field"
+                android:id="@+id/cost_lower"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="gone">
+
                 <TextView
                     android:id="@+id/default_cost_the6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_the_6_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_the6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_for_lower"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
 
-            <LinearLayout
-                android:id="@+id/cost_the7_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_the_7_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_the7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_for_lower"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
 
-            <LinearLayout
-                android:id="@+id/cost_the8_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_the_8_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_the8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_for_lower"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
 
-            <LinearLayout
-                android:id="@+id/cost_the9_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
                 <TextView
                     android:id="@+id/default_cost_the9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_the_9_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_the9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_for_lower"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -182,32 +177,32 @@
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_the_10_cards"
                     android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_the10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_the10"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
 
-            <LinearLayout
-                android:id="@+id/cost_Jack_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_jack_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_Jack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_Jack"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -221,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_spades_of_jack_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
 
                 <EditText
                     android:id="@+id/cost_spadesOfJack"
@@ -229,7 +224,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_spadesOfJack"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -237,18 +234,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_queen_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_Queen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_Queen"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -256,18 +257,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_spades_of_queen_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_SpadesOfQueen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_SpadesOfQueen"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -275,40 +280,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_king_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_King"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_King"
-                    android:inputType="textPersonName" />
-            </LinearLayout>
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
 
-            <LinearLayout
-                android:id="@+id/cost_Ace_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/points_for_ace_cards"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size" />
+
                 <EditText
                     android:id="@+id/cost_Ace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/default_Ace"
-                    android:inputType="textPersonName" />
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

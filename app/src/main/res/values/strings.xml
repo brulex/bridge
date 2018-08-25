@@ -5,9 +5,8 @@
 
     <string name="start_new_game">New game</string>
     <string name="active_games">Active games</string>
-
-
     <!--New game menu-->
+    <string name="new_game_setting">New game setting</string>
     <string name="rule">Rule</string>
     <string name="players">Players</string>
     <!--Field for Rule fragment-->

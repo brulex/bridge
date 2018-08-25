@@ -2,4 +2,15 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size">18sp</dimen>
+    <!-- List of Font Size. -->
+    <dimen name="font_size_24sp">24sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <!-- For CardView. -->
+    <dimen name="cardview_margin">12dp</dimen>
+    <dimen name="cardview_radius">4dp</dimen>
+    <dimen name="cardview_elevation">2dp</dimen>
+    <dimen name="cardview_title_font_size">24sp</dimen>
+    <dimen name="cardview_title_margin_top">8sp</dimen>
+    <dimen name="cardview_title_margin_start">16sp</dimen>
+    <dimen name="cardview_title_margin_end">16sp</dimen>
 </resources>

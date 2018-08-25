@@ -1,6 +1,7 @@
 package io.github.brulex.bridge.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,26 +15,27 @@ import io.github.brulex.bridge.R;
 
 public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.ViewHolder> {
 
-    private List<String> mData;
-    private LayoutInflater mInflater;
+    private final List<Player> mData;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public PlayerListAdapter(Context context, List<String> data) {
+    public PlayerListAdapter(Context context, List<Player> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.player_view, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String animal = mData.get(position).getNickname();
         holder.myTextView.setText(animal);
     }
 
@@ -46,7 +48,7 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        final TextView myTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -61,7 +63,7 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
     }
 
     // convenience method for getting data at click position
-    public String getItem(int id) {
+    public Player getItem(int id) {
         return mData.get(id);
     }
 

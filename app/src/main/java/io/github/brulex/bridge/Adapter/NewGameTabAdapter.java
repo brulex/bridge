@@ -4,20 +4,26 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.SparseArrayCompat;
+import android.util.SparseArray;
+
 import java.util.HashMap;
 import java.util.Map;
 import io.github.brulex.bridge.Fragment.AbstractFragment;
-import io.github.brulex.bridge.Fragment.PlayersNewGameTabFragment;
-import io.github.brulex.bridge.Fragment.RuleSettingNewGameTabMenuFragment;
+import io.github.brulex.bridge.Fragment.PlayersTabFragment;
+import io.github.brulex.bridge.Fragment.RuleTabMenuFragment;
 
-public class NewGameTabAdapter extends FragmentPagerAdapter {
+public class NewGameTabAdapter extends FragmentPagerAdapter implements getFragmentInterface {
 
     private Map<Integer, AbstractFragment> tabs;
-    private Context context;
+    private final RuleTabMenuFragment ruleFragment;
+    private final PlayersTabFragment playersFragment;
 
     public NewGameTabAdapter(Context context, FragmentManager fm) {
         super(fm);
-        this.context = context;
+        Context context1 = context;
+        ruleFragment = RuleTabMenuFragment.getInstance(context);
+        playersFragment = PlayersTabFragment.getInstance(context);
         initTabsMap(context);
     }
 
@@ -38,7 +44,17 @@ public class NewGameTabAdapter extends FragmentPagerAdapter {
 
     private void initTabsMap(Context context) {
         tabs = new HashMap<>();
-        tabs.put(0, PlayersNewGameTabFragment.getInstance(context));
-        tabs.put(1, RuleSettingNewGameTabMenuFragment.getInstance(context));
+        tabs.put(0, ruleFragment);
+        tabs.put(1, playersFragment);
+    }
+
+    @Override
+    public PlayersTabFragment getPlayerFragment() {
+        return playersFragment;
+    }
+
+    @Override
+    public RuleTabMenuFragment getRuleFragment() {
+        return ruleFragment;
     }
 }

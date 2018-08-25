@@ -2,6 +2,7 @@ package io.github.brulex.bridge.DataTransferObject;
 
 public class Player {
 
+    private int i_player;
     private String nickname;
     private int points;
 
@@ -13,6 +14,7 @@ public class Player {
         this.nickname = nickname;
         this.points = points;
     }
+
 
     public String getNickname() {
         return nickname;
