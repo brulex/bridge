@@ -2,16 +2,17 @@ package io.github.brulex.bridge.DataTransferObject;
 
 public class Player {
 
-    private int i_player;
+    private long i_player;
     private String nickname;
     private int points;
 
-    public Player(String nickname, int points) {
+    public Player( long i_player, String nickname, int points) {
+        this.i_player = i_player;
         this.nickname = nickname;
         this.points = points;
     }
 
-    public int getI_player() {
+    public long getI_player() {
         return i_player;
     }
 

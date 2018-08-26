@@ -36,4 +36,5 @@ public abstract class AbstractFragment extends Fragment implements getNewGameSet
     public boolean globalIsEmpty() {
         return false;
     }
+
 }

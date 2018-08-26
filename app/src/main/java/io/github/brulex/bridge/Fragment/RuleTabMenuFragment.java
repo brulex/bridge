@@ -51,11 +51,7 @@ public class RuleTabMenuFragment extends AbstractFragment {
     public boolean globalIsEmpty() {
         boolean res = false;
         if (fieldIsEmpty(gameName)) {
-            gameName.setError("Game name is required!");
-            res = true;
-        }
-        if (fieldIsEmpty(pointToFinish)) {
-            pointToFinish.setError("Game name is required!");
+            gameName.setError(context.getString(R.string.error_game_name));
             res = true;
         }
         return res;

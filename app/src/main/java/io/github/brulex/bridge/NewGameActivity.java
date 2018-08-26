@@ -1,5 +1,6 @@
 package io.github.brulex.bridge;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
@@ -35,7 +36,11 @@ public class NewGameActivity extends FragmentActivity {
                         "name: " + game.getGame_name(),
                         Toast.LENGTH_SHORT)
                         .show();
-                db.addNewGame(game);
+                long i_setting = db.addNewGame(game);
+                Intent start_game = new Intent(getBaseContext(), GameActivity.class);
+                start_game.putExtra("i_setting", i_setting);
+                startActivity(start_game);
+                finish();
             }
             return true;
         }

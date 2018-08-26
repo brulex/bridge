@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GameSetting {
 
-    private int i_setting;
+    private long i_setting;
     private String game_name, date;
     private int points_to_finish, current_round;
     private Boolean flag_lower_card, flag_spades_jack, flag_spades_queen, flag_point_change;
@@ -15,11 +15,11 @@ public class GameSetting {
     public GameSetting() {
     }
 
-    public int getI_setting() {
+    public long getI_setting() {
         return i_setting;
     }
 
-    public void setI_setting(int i_setting) {
+    public void setI_setting(long i_setting) {
         this.i_setting = i_setting;
     }
 

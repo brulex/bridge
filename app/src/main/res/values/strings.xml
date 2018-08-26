@@ -37,12 +37,18 @@
     <string name="default_SpadesOfQueen">default: 50</string>
     <string name="default_King">default: 10</string>
     <string name="default_Ace">default: 10</string>
-
-    <!--Field for Rule fragment-->
+    <!-- Field for Rule fragment -->
     <string name="new_player">New Player</string>
     <string name="nickname">Your nickname</string>
-    <!-- Buttons in toolbar-->
+    <!-- Buttons in toolbar -->
     <string name="start">Start</string>
+    <!-- Game card -->
     <string name="active_cnt_players">Players:</string>
     <string name="active_current_round">Current round:</string>
+    <string name="error_game_name">Game name is required!</string>
+    <string name="reset">Reset</string>
+    <string name="setting">Setting</string>
+    <string name="next_round">Next round</string>
+    <string name="scoring">Scoring</string>
+    <string name="multiplier">Multiplier</string>
 </resources>

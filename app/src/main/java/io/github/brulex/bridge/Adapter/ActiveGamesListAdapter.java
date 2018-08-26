@@ -1,6 +1,7 @@
 package io.github.brulex.bridge.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import java.util.ArrayList;
 
 import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
+import io.github.brulex.bridge.Fragment.GameProcessFragment;
+import io.github.brulex.bridge.GameActivity;
+import io.github.brulex.bridge.NewGameActivity;
 import io.github.brulex.bridge.R;
 
 public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesListAdapter.ViewHolder> {
@@ -36,7 +40,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position)  {
         GameSetting gameSetting = mData.get(position);
         holder.game_name.setText(gameSetting.getGame_name());
         holder.current_round.setText(String.valueOf(gameSetting.getCurrent_round()));
@@ -48,7 +52,6 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
                 DatabaseHandler db = new DatabaseHandler(context);
                 int pos = holder.getAdapterPosition();
                 db.deleteGameSetting(mData.get(pos).getI_setting());
-                Toast.makeText(context, pos + " del: " + mData.get(pos).getI_setting(), Toast.LENGTH_SHORT).show();
                 mData.remove(pos);
                 notifyItemRemoved(pos);
             }
@@ -57,8 +60,9 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
             @Override
             public void onClick(View view) {
                 int pos = holder.getAdapterPosition();
-                // TODO begin new game
-                Toast.makeText(context, "I am: " + mData.get(pos).getGame_name(), Toast.LENGTH_SHORT).show();
+                Intent game = new Intent(context, GameActivity.class);
+                game.putExtra("i_setting",mData.get(pos).getI_setting());
+                context.startActivity(game);
             }
         });
     }
@@ -84,4 +88,5 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
             delete_item = itemView.findViewById(R.id.active_delete);
         }
     }
+
 }
