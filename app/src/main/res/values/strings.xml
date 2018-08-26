@@ -43,4 +43,6 @@
     <string name="nickname">Your nickname</string>
     <!-- Buttons in toolbar-->
     <string name="start">Start</string>
+    <string name="active_cnt_players">Players:</string>
+    <string name="active_current_round">Current round:</string>
 </resources>

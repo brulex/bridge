@@ -21,7 +21,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
     private final ArrayList<GameSetting> mData;
     private final LayoutInflater mInflater;
     private Context context;
-    // data is passed into the constructor
+
     public ActiveGamesListAdapter(Context context, ArrayList<GameSetting> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
@@ -41,13 +41,14 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
         holder.game_name.setText(gameSetting.getGame_name());
         holder.current_round.setText(String.valueOf(gameSetting.getCurrent_round()));
         holder.player_cnt.setText(String.valueOf(gameSetting.getPlayers().size()));
-
+        holder.date.setText(gameSetting.getDate());
         holder.delete_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseHandler db = new DatabaseHandler(context);
                 int pos = holder.getAdapterPosition();
                 db.deleteGameSetting(mData.get(pos).getI_setting());
+                Toast.makeText(context, pos + " del: " + mData.get(pos).getI_setting(), Toast.LENGTH_SHORT).show();
                 mData.remove(pos);
                 notifyItemRemoved(pos);
             }
@@ -71,6 +72,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
         final TextView game_name;
         final TextView current_round;
         final TextView player_cnt;
+        final TextView date;
         final ImageButton delete_item;
 
         ViewHolder(final View itemView) {
@@ -78,6 +80,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
             game_name = itemView.findViewById(R.id.active_game_name);
             player_cnt = itemView.findViewById(R.id.active_number_of_players);
             current_round = itemView.findViewById(R.id.active_current_round);
+            date = itemView.findViewById(R.id.active_date);
             delete_item = itemView.findViewById(R.id.active_delete);
         }
     }

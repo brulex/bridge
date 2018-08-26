@@ -16,16 +16,45 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import io.github.brulex.bridge.Adapter.PlayerListAdapter;
 import io.github.brulex.bridge.DataTransferObject.Player;
 import io.github.brulex.bridge.R;
 
-public class PlayersTabFragment extends AbstractFragment implements PlayerListAdapter.ItemClickListener{
+public class PlayersTabFragment extends AbstractFragment implements PlayerListAdapter.ItemClickListener {
+
     private PlayerListAdapter adapter;
     private RecyclerView recyclerView;
     private ArrayList<Player> players;
+    private final View.OnClickListener onFloatingButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LayoutInflater li = LayoutInflater.from(view.getContext());
+            View promptsView = li.inflate(R.layout.dialog_new_player, null);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    view.getContext());
+            alertDialogBuilder.setView(promptsView);
+            final EditText userInput = promptsView.findViewById(R.id.new_nickname);
+            alertDialogBuilder
+                    .setCancelable(false)
+                    .setPositiveButton("Save",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    players.add(new Player(userInput.getText().toString(), 0));
+                                    adapter.notifyItemInserted(players.size());
+                                    recyclerView.scrollToPosition(players.size());
+                                }
+                            })
+                    .setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    };
 
     public static PlayersTabFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -60,22 +89,22 @@ public class PlayersTabFragment extends AbstractFragment implements PlayerListAd
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // data to populate the RecyclerView with
+
         players = new ArrayList<>();
-        if(savedInstanceState != null) {
-            List<String> temp =  savedInstanceState.getStringArrayList("players");
+        if (savedInstanceState != null) {
+            List<String> temp = savedInstanceState.getStringArrayList("players");
             assert temp != null;
             for (String i : temp) {
-                players.add(new Player(i,0));
+                players.add(new Player(i, 0));
             }
         }
-        // set up Floating button
+
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floating_action_button);
         floatingActionButton.setOnClickListener(onFloatingButtonClick);
-        // set up adapter
+
         adapter = new PlayerListAdapter(getContext(), players);
         adapter.setClickListener(this);
-        // set up the RecyclerView
+
         recyclerView = view.findViewById(R.id.players_add_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -84,11 +113,11 @@ public class PlayersTabFragment extends AbstractFragment implements PlayerListAd
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        ArrayList<String> temp =  new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
         for (Player i : players) {
             temp.add(i.getNickname());
         }
-        outState.putStringArrayList("players",temp);
+        outState.putStringArrayList("players", temp);
     }
 
     @Override
@@ -97,38 +126,4 @@ public class PlayersTabFragment extends AbstractFragment implements PlayerListAd
         adapter.notifyItemRemoved(position);
         recyclerView.scrollToPosition(position);
     }
-
-    private final View.OnClickListener onFloatingButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            LayoutInflater li = LayoutInflater.from(view.getContext());
-            View promptsView = li.inflate(R.layout.dialog_new_player, null);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    view.getContext());
-            alertDialogBuilder.setView(promptsView);
-            final EditText userInput = promptsView.findViewById(R.id.new_nickname);
-            alertDialogBuilder
-                    .setCancelable(false)
-                    .setPositiveButton("Save",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    players.add(new Player(userInput.getText().toString(),0));
-                                    adapter.notifyItemInserted(players.size());
-                                    recyclerView.scrollToPosition(players.size());
-                                }
-                            })
-                    .setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-
-
-        }
-    };
-
 }

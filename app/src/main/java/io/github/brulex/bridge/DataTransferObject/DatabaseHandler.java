@@ -5,12 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Locale;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -23,7 +22,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //    -----------------------------------------------------------------------
     private static final String KEY_I_SETTING = "i_setting";
     private static final String KEY_GAME_NAME = "game_name";
-    private static final String KEY_DATA = "data";
+    private static final String KEY_DATE = "date";
     private static final String KEY_POINTS_TO_FINISH = "points_to_finish";
     private static final String KEY_FLAG_L = "flag_lower_card";
     private static final String KEY_FLAG_SJ = "flag_spades_jack";
@@ -58,7 +57,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_GAME_RULE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GAME_RULE + "("
                 + KEY_I_SETTING + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_GAME_NAME + " VARCHAR NOT NULL,"
-                + KEY_DATA + " VARCHAR NOT NULL,"
+                + KEY_DATE + " VARCHAR NOT NULL,"
                 + KEY_POINTS_TO_FINISH + " INTEGER NOT NULL,"
                 + KEY_CURRENT_ROUND + " INTEGER NOT NULL,"
                 + KEY_FLAG_L + " INTEGER NOT NULL,"
@@ -97,9 +96,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addNewGame(GameSetting ruleSetting) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-//        new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(Calendar.getInstance().getTime())
         values.put(KEY_GAME_NAME, ruleSetting.getGame_name());
-        values.put(KEY_DATA, "2018");
+        values.put(KEY_DATE, new SimpleDateFormat("yyyy.MM.dd HH:mm:ss a", Locale.getDefault()).format(Calendar.getInstance().getTime()));
         values.put(KEY_CURRENT_ROUND, ruleSetting.getCurrent_round());
         values.put(KEY_POINTS_TO_FINISH, ruleSetting.getPoints_to_finish());
         values.put(KEY_FLAG_L, ruleSetting.getFlag_lower_card() ? 1 : 0);
@@ -122,7 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    private void addPlayerList(ArrayList<Player> players, long i_setting ){
+    private void addPlayerList(ArrayList<Player> players, long i_setting) {
         SQLiteDatabase db = this.getWritableDatabase();
         for (Player i : players) {
             ContentValues values = new ContentValues();
@@ -140,46 +138,48 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT * " +
                 " FROM " + TABLE_GAME_RULE +
                 " WHERE " + KEY_I_SETTING + " = " + i_setting;
-
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null) {
             cursor.moveToFirst();
             return getGame(cursor);
         } else return null;
     }
-int getInt(Cursor c, String key){
+
+    int getInt(Cursor c, String key) {
         return c.getInt(c.getColumnIndex(key));
     }
-    String getString(Cursor c, String key){
+
+    String getString(Cursor c, String key) {
         return c.getString(c.getColumnIndex(key));
     }
-    private GameSetting getGame(Cursor cursor){
 
+    private GameSetting getGame(Cursor cursor) {
         GameSetting gameSetting = new GameSetting();
-        gameSetting.setI_setting(getInt(cursor,KEY_I_SETTING));
-        gameSetting.setGame_name(getString(cursor,KEY_GAME_NAME));
-        gameSetting.setPoints_to_finish(getInt(cursor,KEY_POINTS_TO_FINISH));
-        gameSetting.setCurrent_round(getInt(cursor,KEY_CURRENT_ROUND));
-        gameSetting.setFlag_lower_card(getInt(cursor,KEY_FLAG_L) == 1);
-        gameSetting.setFlag_spades_jack(getInt(cursor,KEY_FLAG_SJ) == 1);
-        gameSetting.setFlag_spades_queen(getInt(cursor,KEY_FLAG_SQ) == 1);
-        gameSetting.setFlag_point_change(getInt(cursor,KEY_FLAG_PC) == 1);
-        gameSetting.setCost_the6(getInt(cursor,KEY_6));
-        gameSetting.setCost_the7(getInt(cursor,KEY_7));
-        gameSetting.setCost_the8(getInt(cursor,KEY_8));
-        gameSetting.setCost_the9(getInt(cursor,KEY_9));
-        gameSetting.setCost_the10(getInt(cursor,KEY_10));
-        gameSetting.setCost_Jack(getInt(cursor,KEY_J));
-        gameSetting.setCost_Spades_of_Jack(getInt(cursor,KEY_SJ));
-        gameSetting.setCost_Queen(getInt(cursor,KEY_Q));
-        gameSetting.setCost_Spades_of_Queen(getInt(cursor,KEY_SQ));
-        gameSetting.setCost_King(getInt(cursor,KEY_K));
-        gameSetting.setCost_Ace(getInt(cursor,KEY_A));
+        gameSetting.setI_setting(getInt(cursor, KEY_I_SETTING));
+        gameSetting.setGame_name(getString(cursor, KEY_GAME_NAME));
+        gameSetting.setDate(getString(cursor, KEY_DATE));
+        gameSetting.setPoints_to_finish(getInt(cursor, KEY_POINTS_TO_FINISH));
+        gameSetting.setCurrent_round(getInt(cursor, KEY_CURRENT_ROUND));
+        gameSetting.setFlag_lower_card(getInt(cursor, KEY_FLAG_L) == 1);
+        gameSetting.setFlag_spades_jack(getInt(cursor, KEY_FLAG_SJ) == 1);
+        gameSetting.setFlag_spades_queen(getInt(cursor, KEY_FLAG_SQ) == 1);
+        gameSetting.setFlag_point_change(getInt(cursor, KEY_FLAG_PC) == 1);
+        gameSetting.setCost_the6(getInt(cursor, KEY_6));
+        gameSetting.setCost_the7(getInt(cursor, KEY_7));
+        gameSetting.setCost_the8(getInt(cursor, KEY_8));
+        gameSetting.setCost_the9(getInt(cursor, KEY_9));
+        gameSetting.setCost_the10(getInt(cursor, KEY_10));
+        gameSetting.setCost_Jack(getInt(cursor, KEY_J));
+        gameSetting.setCost_Spades_of_Jack(getInt(cursor, KEY_SJ));
+        gameSetting.setCost_Queen(getInt(cursor, KEY_Q));
+        gameSetting.setCost_Spades_of_Queen(getInt(cursor, KEY_SQ));
+        gameSetting.setCost_King(getInt(cursor, KEY_K));
+        gameSetting.setCost_Ace(getInt(cursor, KEY_A));
         gameSetting.setPlayers(getAllPlayers(gameSetting.getI_setting()));
         return gameSetting;
     }
 
-    public ArrayList<GameSetting> getAllGames(){
+    public ArrayList<GameSetting> getAllGames() {
         ArrayList<GameSetting> gameSettings = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_GAME_RULE;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -191,16 +191,16 @@ int getInt(Cursor c, String key){
         }
         return gameSettings;
     }
+
     private ArrayList<Player> getAllPlayers(int i_setting) {
         ArrayList<Player> playerList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_PLAYERS +
                 " WHERE " + KEY_I_SETTING + " = " + i_setting;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
         if (cursor.moveToFirst()) {
             do {
-                playerList.add(new Player(getString(cursor,KEY_NICKNAME), getInt(cursor,KEY_POINTS)));
+                playerList.add(new Player(getString(cursor, KEY_NICKNAME), getInt(cursor, KEY_POINTS)));
             } while (cursor.moveToNext());
         }
         return playerList;

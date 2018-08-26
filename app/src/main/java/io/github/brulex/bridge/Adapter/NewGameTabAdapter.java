@@ -4,11 +4,10 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.SparseArrayCompat;
-import android.util.SparseArray;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import io.github.brulex.bridge.Fragment.AbstractFragment;
 import io.github.brulex.bridge.Fragment.PlayersTabFragment;
 import io.github.brulex.bridge.Fragment.RuleTabMenuFragment;
@@ -21,10 +20,9 @@ public class NewGameTabAdapter extends FragmentPagerAdapter implements getFragme
 
     public NewGameTabAdapter(Context context, FragmentManager fm) {
         super(fm);
-        Context context1 = context;
         ruleFragment = RuleTabMenuFragment.getInstance(context);
         playersFragment = PlayersTabFragment.getInstance(context);
-        initTabsMap(context);
+        initTabsMap();
     }
 
     @Override
@@ -42,7 +40,7 @@ public class NewGameTabAdapter extends FragmentPagerAdapter implements getFragme
         return tabs.size();
     }
 
-    private void initTabsMap(Context context) {
+    private void initTabsMap() {
         tabs = new HashMap<>();
         tabs.put(0, ruleFragment);
         tabs.put(1, playersFragment);

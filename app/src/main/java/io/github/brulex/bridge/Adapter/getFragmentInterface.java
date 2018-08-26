@@ -5,5 +5,6 @@ import io.github.brulex.bridge.Fragment.RuleTabMenuFragment;
 
 public interface getFragmentInterface {
     PlayersTabFragment getPlayerFragment();
+
     RuleTabMenuFragment getRuleFragment();
 }

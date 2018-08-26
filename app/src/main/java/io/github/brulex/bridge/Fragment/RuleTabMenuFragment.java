@@ -16,26 +16,11 @@ import io.github.brulex.bridge.DataTransferObject.GameSetting;
 import io.github.brulex.bridge.R;
 
 public class RuleTabMenuFragment extends AbstractFragment {
-    private EditText gameName;
-    private EditText pointToFinish;
-    private CheckBox flag_lower;
-    private CheckBox flag_sJack;
-    private CheckBox flag_sQueen;
-    private CheckBox flag_changeMode;
-    private EditText cost_the6;
-    private EditText cost_the7;
-    private EditText cost_the8;
-    private EditText cost_the9;
-    private EditText cost_the10;
-    private EditText cost_Jack;
-    private EditText cost_SJack;
-    private EditText cost_Queen;
-    private EditText cost_SQueen;
-    private EditText cost_King;
-    private EditText cost_Ace;
-    private LinearLayout lower_fields;
-    private LinearLayout SJack_field;
-    private LinearLayout SQueen_field;
+    private EditText gameName, pointToFinish;
+    private CheckBox flag_lower, flag_sJack, flag_sQueen, flag_changeMode;
+    private EditText cost_the6, cost_the7, cost_the8, cost_the9, cost_the10;
+    private EditText cost_Jack, cost_SJack, cost_Queen, cost_SQueen, cost_King, cost_Ace;
+    private LinearLayout lower_fields, SJack_field, SQueen_field;
 
     public static RuleTabMenuFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -65,11 +50,11 @@ public class RuleTabMenuFragment extends AbstractFragment {
     @Override
     public boolean globalIsEmpty() {
         boolean res = false;
-        if(fieldIsEmpty(gameName)) {
+        if (fieldIsEmpty(gameName)) {
             gameName.setError("Game name is required!");
             res = true;
         }
-        if(fieldIsEmpty(pointToFinish)) {
+        if (fieldIsEmpty(pointToFinish)) {
             pointToFinish.setError("Game name is required!");
             res = true;
         }

@@ -29,12 +29,13 @@ public class ActiveGamesFragment extends AbstractFragment {
         return view;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         DatabaseHandler db = new DatabaseHandler(getContext());
         gameSettings = db.getAllGames();
-        adapter = new ActiveGamesListAdapter(getContext(),gameSettings);
+        adapter = new ActiveGamesListAdapter(getContext(), gameSettings);
         active_game_List = view.findViewById(R.id.active_games_list);
         active_game_List.setLayoutManager(new LinearLayoutManager(getContext()));
         active_game_List.setAdapter(adapter);

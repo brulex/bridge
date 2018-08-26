@@ -19,7 +19,6 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
     private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
     public PlayerListAdapter(Context context, List<Player> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
@@ -32,21 +31,29 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
         return new ViewHolder(view);
     }
 
-    // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String animal = mData.get(position).getNickname();
         holder.myTextView.setText(animal);
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
+    public Player getItem(int id) {
+        return mData.get(id);
+    }
 
-    // stores and recycles views as they are scrolled off screen
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView myTextView;
 
@@ -60,20 +67,5 @@ public class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.Vi
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
-    }
-
-    // convenience method for getting data at click position
-    public Player getItem(int id) {
-        return mData.get(id);
-    }
-
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }
