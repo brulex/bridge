@@ -8,6 +8,29 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_points"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_16sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp"/>
+        <TextView
+            android:id="@+id/total_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_16sp"
+            android:textStyle="bold"
+            tools:text="240" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/dialog_lower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,20 +42,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="@string/points_for_the_6_cards"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/seekBar_the6_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,9 +51,9 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="3" />
+                android:text="@string/zero"
+                tools:ignore="HardcodedText" />
 
             <SeekBar
                 android:id="@+id/seekBar_the6"
@@ -68,20 +77,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="@string/points_for_the_7_cards"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/seekBar_the7_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,9 +86,8 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="3" />
+                android:text="@string/zero" />
 
             <SeekBar
                 android:id="@+id/seekBar_the7"
@@ -116,19 +110,6 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="@string/points_for_the_8_cards"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/seekBar_the8_text"
@@ -140,9 +121,8 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="3" />
+                android:text="@string/zero" />
 
             <SeekBar
                 android:id="@+id/seekBar_the8"
@@ -166,20 +146,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:text="@string/points_for_the_9_cards"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/seekBar_the9_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -189,9 +155,8 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="3" />
+                android:text="@string/zero" />
 
             <SeekBar
                 android:id="@+id/seekBar_the9"
@@ -215,19 +180,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_the_10_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/seekBar_the10_text"
@@ -239,9 +191,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_the10"
@@ -264,19 +215,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_jack_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/seekBar_jack_text"
@@ -288,9 +226,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_jack"
@@ -315,20 +252,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_spades_of_jack_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/seekBar_sjack_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -338,9 +261,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_sjack"
@@ -364,20 +286,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_queen_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/seekBar_queen_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -387,9 +295,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_queen"
@@ -414,20 +321,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_spades_of_queen_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/seekBar_squeen_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -437,9 +330,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_squeen"
@@ -463,20 +355,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_king_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/seekBar_king_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -486,9 +364,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_king"
@@ -512,20 +389,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/points_for_ace_cards"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/seekBar_ace_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -535,9 +398,8 @@
             android:layout_weight="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            android:text="@string/zero" />
 
         <SeekBar
             android:id="@+id/seekBar_ace"

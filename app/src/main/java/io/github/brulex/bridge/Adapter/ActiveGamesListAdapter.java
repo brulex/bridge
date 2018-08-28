@@ -9,15 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
-import io.github.brulex.bridge.Fragment.GameProcessFragment;
 import io.github.brulex.bridge.GameActivity;
-import io.github.brulex.bridge.NewGameActivity;
 import io.github.brulex.bridge.R;
 
 public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesListAdapter.ViewHolder> {

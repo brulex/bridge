@@ -45,8 +45,8 @@ public class MainMenuFragment extends AbstractFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_main_menu, container, false);
-        return v;
+        view = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        return view;
     }
 
     @Override

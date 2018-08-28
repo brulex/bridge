@@ -1,11 +1,12 @@
 package io.github.brulex.bridge.Fragment;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import io.github.brulex.bridge.Adapter.GameProccessListAdapter;
-import io.github.brulex.bridge.Adapter.ScoringTabAdapter;
 import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
 import io.github.brulex.bridge.R;
@@ -56,6 +58,7 @@ public class GameProcessFragment extends AbstractFragment {
         active_game_List.setLayoutManager(new LinearLayoutManager(getContext()));
         active_game_List.setAdapter(adapter);
         initToolbar();
+
         current_round = view.findViewById(R.id.game_current_round);
         current_round.setText(String.valueOf(gameSettings.getCurrent_round()));
         next_round = view.findViewById(R.id.game_next_round);
@@ -77,27 +80,34 @@ public class GameProcessFragment extends AbstractFragment {
         }
     };
 
-    View.OnClickListener nextRoundClick = new View.OnClickListener() {
+    private final View.OnClickListener nextRoundClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Toast.makeText(getContext(), "next round", Toast.LENGTH_SHORT).show();
 
-            LayoutInflater li = LayoutInflater.from(view.getContext());
-            View promptsView = li.inflate(R.layout.dialog_scoring, null);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-            alertDialogBuilder.setView(promptsView);
+            LayoutInflater li = LayoutInflater.from(view.getContext());
+            View promptsView = li.inflate(R.layout.dialog_scoring, null, false);
             final EditText multiplier = promptsView.findViewById(R.id.multiplier);
 
-            ScoringTabAdapter scoringTabAdapter = new ScoringTabAdapter(view.getContext(), getChildFragmentManager(), gameSettings.getPlayers());
-            ViewPager viewPager = promptsView.findViewById(R.id.dialog_tab_players);
-            viewPager.setAdapter(scoringTabAdapter);
-
+            alertDialogBuilder.setView(promptsView);
             alertDialogBuilder.setCancelable(false)
-                    .setPositiveButton("Finish",
+                    .setPositiveButton("GO",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Toast.makeText(getContext(), "Saved " + multiplier.getText().toString()
-                                            , Toast.LENGTH_SHORT).show();
+                                    if (multiplier.getText().toString().isEmpty()) {
+                                        multiplier.setError(getContext().getString(R.string.error_multiplier));
+                                    } else {
+                                        Fragment scoringFragment =  ScoringFragment.getInstance(getContext());
+                                        Bundle data = new Bundle();
+                                        data.putLong("i_setting", gameSettings.getI_setting());
+                                        data.putInt("multiplier", Integer.valueOf(multiplier.getText().toString()));
+                                        scoringFragment.setArguments(data);
+                                        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+                                        fragmentTransaction.replace(R.id.game_container, scoringFragment, ScoringFragment.TAG)
+                                                .addToBackStack("active")
+                                                .commit();
+                                    }
                                 }
                             })
                     .setNegativeButton("Cancel",

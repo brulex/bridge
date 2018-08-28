@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import io.github.brulex.bridge.Constants;
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
@@ -17,10 +17,10 @@ import io.github.brulex.bridge.R;
 
 public class RuleTabMenuFragment extends AbstractFragment {
     private EditText gameName, pointToFinish;
-    private CheckBox flag_lower, flag_sJack, flag_sQueen, flag_changeMode;
+    private Switch flag_lower, flag_sJack, flag_sQueen, flag_changeMode, setting_cost;
     private EditText cost_the6, cost_the7, cost_the8, cost_the9, cost_the10;
     private EditText cost_Jack, cost_SJack, cost_Queen, cost_SQueen, cost_King, cost_Ace;
-    private LinearLayout lower_fields, SJack_field, SQueen_field;
+    private LinearLayout lower_fields, setting_cost_fields;
 
     public static RuleTabMenuFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -29,10 +29,6 @@ public class RuleTabMenuFragment extends AbstractFragment {
         fragment.setContext(context);
         fragment.setTitle(context.getString(R.string.rule));
         return fragment;
-    }
-
-    private void setContext(Context context) {
-        this.context = context;
     }
 
     private int converterInt(EditText field) {
@@ -90,20 +86,31 @@ public class RuleTabMenuFragment extends AbstractFragment {
         flag_sJack = view.findViewById(R.id.flag_spadesOfJack);
         flag_sQueen = view.findViewById(R.id.flag_spadesOfQueen);
         flag_changeMode = view.findViewById(R.id.flag_changeMode);
+        setting_cost = view.findViewById(R.id.setting_cost);
         cost_the6 = view.findViewById(R.id.cost_the6);
+        cost_the6.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_6,0,0,0);
         cost_the7 = view.findViewById(R.id.cost_the7);
+        cost_the7.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_7,0,0,0);
         cost_the8 = view.findViewById(R.id.cost_the8);
+        cost_the8.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_8,0,0,0);
         cost_the9 = view.findViewById(R.id.cost_the9);
+        cost_the9.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_9,0,0,0);
         cost_the10 = view.findViewById(R.id.cost_the10);
+        cost_the10.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_10,0,0,0);
         cost_Jack = view.findViewById(R.id.cost_Jack);
+        cost_Jack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_j,0,0,0);
         cost_SJack = view.findViewById(R.id.cost_spadesOfJack);
+        cost_SJack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sj,0,0,0);
         cost_Queen = view.findViewById(R.id.cost_Queen);
+        cost_Queen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_q,0,0,0);
         cost_SQueen = view.findViewById(R.id.cost_SpadesOfQueen);
+        cost_SQueen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sq,0,0,0);
         cost_King = view.findViewById(R.id.cost_King);
+        cost_King.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_k,0,0,0);
         cost_Ace = view.findViewById(R.id.cost_Ace);
+        cost_Ace.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_a,0,0,0);
         lower_fields = view.findViewById(R.id.cost_lower);
-        SJack_field = view.findViewById(R.id.cost_SJack_field);
-        SQueen_field = view.findViewById(R.id.cost_SQueen_field);
+        setting_cost_fields = view.findViewById(R.id.setting_cost_fields);
         return view;
     }
 
@@ -147,6 +154,7 @@ public class RuleTabMenuFragment extends AbstractFragment {
         flag_sQueen.setOnClickListener(onCheckBoxClick);
         flag_sJack.setOnClickListener(onCheckBoxClick);
         flag_changeMode.setOnClickListener(onCheckBoxClick);
+        setting_cost.setOnClickListener(onCheckBoxClick);
     }
 
     private final View.OnClickListener onCheckBoxClick = new View.OnClickListener() {
@@ -157,10 +165,13 @@ public class RuleTabMenuFragment extends AbstractFragment {
                     lower_fields.setVisibility(flag_lower.isChecked() ? View.VISIBLE : View.GONE);
                     break;
                 case R.id.flag_spadesOfJack:
-                    SJack_field.setVisibility(flag_sJack.isChecked() ? View.VISIBLE : View.GONE);
+                    cost_SJack.setVisibility(flag_sJack.isChecked() ? View.VISIBLE : View.GONE);
                     break;
                 case R.id.flag_spadesOfQueen:
-                    SQueen_field.setVisibility(flag_sQueen.isChecked() ? View.VISIBLE : View.GONE);
+                    cost_SQueen.setVisibility(flag_sQueen.isChecked() ? View.VISIBLE : View.GONE);
+                    break;
+                case R.id.setting_cost:
+                    setting_cost_fields.setVisibility(setting_cost.isChecked() ? View.VISIBLE : View.GONE);
                     break;
                 case R.id.flag_changeMode:
                     //TODO

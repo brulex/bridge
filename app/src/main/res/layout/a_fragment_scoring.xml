@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/game_toolbar"
+            android:id="@+id/scoring_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -25,49 +23,63 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:padding="4dp">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/active_current_round"
-                android:textColor="@android:color/background_light"
-                android:textSize="@dimen/font_size_16sp" />
-
-            <TextView
-                android:id="@+id/game_current_round"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@string/multiplier"
                 android:textColor="@android:color/background_light"
-                android:textSize="@dimen/font_size_16sp"
-                tools:text="4" />
+                android:textSize="@dimen/font_size_16sp" />
+            <TextView
+                android:id="@+id/multiplier_to_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="240"
+                android:textColor="@android:color/background_light"
+                android:textSize="@dimen/font_size_16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/x"
+                android:textColor="@android:color/background_light"
+                android:textSize="@dimen/font_size_16sp" />
         </LinearLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/scoring_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="6dp"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/colorAccent" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/active_games_list"
-        android:layout_width="0dp"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/scoring_pager"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    </android.support.v7.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/game_next_round"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:elevation="4dp"
-        android:text="@string/next_round"
-        app:layout_constraintBottom_toBottomOf="@+id/active_games_list"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:srcCompat="@drawable/ic_done_24dp" />
 
 </android.support.constraint.ConstraintLayout>

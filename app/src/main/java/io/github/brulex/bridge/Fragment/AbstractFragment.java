@@ -22,6 +22,10 @@ public abstract class AbstractFragment extends Fragment implements getNewGameSet
         this.title = title;
     }
 
+    void setContext(Context context) {
+        this.context = context;
+    }
+
     @Override
     public ArrayList<Player> getPlayerInfo() {
         return null;

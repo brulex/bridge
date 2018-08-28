@@ -8,7 +8,7 @@
         <item name="android:windowNoTitle">true</item>
     </style>
     <!-- Base application theme. -->
-    <style name="MainMenu" parent="AppThame"></style>
+    <style name="MainMenu" parent="AppThame" />
 
     <style name="NewGameMenu" parent="AppThame">
         <item name="android:windowActionBar">true</item>

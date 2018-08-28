@@ -6,14 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
-import io.github.brulex.bridge.DataTransferObject.GameSetting;
 import io.github.brulex.bridge.DataTransferObject.Player;
 import io.github.brulex.bridge.R;
 
@@ -51,6 +47,7 @@ public class GameProccessListAdapter extends RecyclerView.Adapter<GameProccessLi
     public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView nickname;
         final TextView points;
+
         ViewHolder(final View itemView) {
             super(itemView);
             nickname = itemView.findViewById(R.id.player_nickname);

@@ -106,7 +106,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public GameSetting getGameSetting(long i_setting) {
         SQLiteDatabase db = this.getReadableDatabase();
-        GameSetting ruleSetting;
         String selectQuery = "SELECT * " +
                 " FROM " + Constants.TABLE_GAME_RULE +
                 " WHERE " + Constants.KEY_I_SETTING + " = " + i_setting;
@@ -117,11 +116,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else return null;
     }
 
-    int getInt(Cursor c, String key) {
+    private int getInt(Cursor c, String key) {
         return c.getInt(c.getColumnIndex(key));
     }
 
-    String getString(Cursor c, String key) {
+    private String getString(Cursor c, String key) {
         return c.getString(c.getColumnIndex(key));
     }
 
@@ -174,11 +173,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
                 playerList.add(new Player(
                         cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_PLAYER)),
+                        cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_SETTING)),
                         getString(cursor, Constants.KEY_NICKNAME),
                         getInt(cursor, Constants.KEY_POINTS)));
             } while (cursor.moveToNext());
         }
         return playerList;
+    }
+
+    public Player getPlayer(long i_player) {
+        String selectQuery = "SELECT  * FROM " + Constants.TABLE_PLAYERS +
+                " WHERE " + Constants.KEY_I_PLAYER + " = " + i_player;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+                return new Player(
+                        cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_PLAYER)),
+                        cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_SETTING)),
+                        getString(cursor, Constants.KEY_NICKNAME),
+                        getInt(cursor, Constants.KEY_POINTS));
+        }
+        return null;
     }
 
     public void deleteGameSetting(long i_setting) {
