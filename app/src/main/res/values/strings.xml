@@ -56,5 +56,6 @@
     <string name="x">x</string>
     <string name="zero">0</string>
     <string name="confirm">Are you sure that you want to begin new round with this points?</string>
+    <string name="confirm_back">Are you sure that you want back without any changes?</string>
     <string name="confirm_title">Are you sure?</string>
 </resources>

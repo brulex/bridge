@@ -56,7 +56,7 @@ public class RuleTabMenuFragment extends AbstractFragment {
     @Override
     public GameSetting getCreatedGameSetting() {
         GameSetting game = new GameSetting();
-        game.setCurrent_round(0);
+        game.setCurrent_round(1);
         game.setGame_name(converterStr(gameName));
         game.setPoints_to_finish(fieldIsEmpty(pointToFinish) ? Constants.TO_FINISH : converterInt(pointToFinish));
         game.setFlag_lower_card(flag_lower.isChecked());

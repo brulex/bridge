@@ -37,7 +37,7 @@ public class NewGameActivity extends FragmentActivity {
                         Toast.LENGTH_SHORT)
                         .show();
                 long i_setting = db.addNewGame(game);
-                Intent start_game = new Intent(getBaseContext(), GameActivity.class);
+                Intent start_game = new Intent(getBaseContext(), GameProcessActivity.class);
                 start_game.putExtra("i_setting", i_setting);
                 startActivity(start_game);
                 finish();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,14 +17,15 @@ import io.github.brulex.bridge.Fragment.ScoringTabFragment;
 
 public class ScoringTabAdapter extends FragmentPagerAdapter {
 
-    private Map<Integer, AbstractFragment> tabs;
+    private Map<Integer, ScoringTabFragment> tabs;
     private final ArrayList<ScoringTabFragment> fragments;
-
-    public ScoringTabAdapter(Context context, FragmentManager fm, GameSetting gameSetting) {
+Context ss;
+    public ScoringTabAdapter(Context context, FragmentManager fm, GameSetting gameSetting, int mult) {
         super(fm);
+        ss = context;
         fragments = new ArrayList<>();
         for (Player i : gameSetting.getPlayers()) {
-            fragments.add(ScoringTabFragment.getInstance(context, i, gameSetting));
+            fragments.add(ScoringTabFragment.getInstance(context, i, gameSetting, mult));
         }
         initTabsMap();
     }
@@ -34,7 +36,7 @@ public class ScoringTabAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public ScoringTabFragment getItem(int position) {
         return tabs.get(position);
     }
 

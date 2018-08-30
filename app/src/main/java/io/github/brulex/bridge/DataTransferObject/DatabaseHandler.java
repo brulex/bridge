@@ -203,4 +203,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(Constants.TABLE_PLAYERS, Constants.KEY_I_SETTING + " = " + i_setting, null);
         db.close();
     }
+
+    public void updateForNewRound(ArrayList<Player> newPoints, long i_setting, int current_round){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Constants.KEY_CURRENT_ROUND, current_round + 1);
+        db.update(Constants.TABLE_GAME_RULE, values,
+                Constants.KEY_I_SETTING + "=" + i_setting,null);
+        for (Player i: newPoints) {
+            values.clear();
+            values.put(Constants.KEY_POINTS, i.getPoints());
+            db.update(Constants.TABLE_PLAYERS, values,
+                    Constants.KEY_I_PLAYER + "=" + i.getI_player(),null);
+        }
+        db.close();
+    }
+    
 }

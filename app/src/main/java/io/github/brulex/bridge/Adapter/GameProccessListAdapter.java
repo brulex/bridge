@@ -18,6 +18,7 @@ public class GameProccessListAdapter extends RecyclerView.Adapter<GameProccessLi
     private final ArrayList<Player> mData;
     private final LayoutInflater mInflater;
     private Context context;
+    private ViewHolder viewHolder;
 
     public GameProccessListAdapter(Context context, ArrayList<Player> data) {
         this.mInflater = LayoutInflater.from(context);
@@ -30,6 +31,7 @@ public class GameProccessListAdapter extends RecyclerView.Adapter<GameProccessLi
     public GameProccessListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.player_item, parent, false);
         return new GameProccessListAdapter.ViewHolder(view);
+
     }
 
     @Override

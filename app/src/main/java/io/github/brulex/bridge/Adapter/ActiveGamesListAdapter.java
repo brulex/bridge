@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
-import io.github.brulex.bridge.GameActivity;
+import io.github.brulex.bridge.GameProcessActivity;
 import io.github.brulex.bridge.R;
 
 public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesListAdapter.ViewHolder> {
@@ -57,7 +57,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
             @Override
             public void onClick(View view) {
                 int pos = holder.getAdapterPosition();
-                Intent game = new Intent(context, GameActivity.class);
+                Intent game = new Intent(context, GameProcessActivity.class);
                 game.putExtra("i_setting",mData.get(pos).getI_setting());
                 context.startActivity(game);
             }
