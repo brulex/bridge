@@ -67,6 +67,9 @@ public class GameProcessActivity extends FragmentActivity {
                     openSetting();
                     break;
                 case R.id.reset:
+                   db.resetGame(gameSettings.getI_setting());
+                    current_round.setText(String.valueOf(1));
+                    adapter.resetPoints();
                     break;
             }
             return true;

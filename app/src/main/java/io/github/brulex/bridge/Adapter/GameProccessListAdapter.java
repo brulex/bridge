@@ -41,6 +41,13 @@ public class GameProccessListAdapter extends RecyclerView.Adapter<GameProccessLi
         holder.points.setText(String.valueOf(player.getPoints()));
     }
 
+    public void resetPoints() {
+        for (Player i : mData) {
+            i.setPoints(0);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mData.size();

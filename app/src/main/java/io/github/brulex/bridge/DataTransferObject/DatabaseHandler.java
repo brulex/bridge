@@ -218,5 +218,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
     }
-    
+
+    public void resetGame(long i_setting){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Constants.KEY_CURRENT_ROUND, 1);
+        db.update(Constants.TABLE_GAME_RULE, values,
+                Constants.KEY_I_SETTING + "=" + i_setting,null);
+        values.clear();
+        values.put(Constants.KEY_POINTS, 0);
+        db.update(Constants.TABLE_PLAYERS, values,
+                Constants.KEY_I_SETTING + "=" + i_setting,null);
+        db.close();
+    }
 }
