@@ -30,22 +30,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
                 android:text="@string/multiplier"
                 android:textColor="@android:color/background_light"
                 android:textSize="@dimen/font_size_16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/x"
+                android:textColor="@android:color/background_light"
+                android:textSize="@dimen/font_size_16sp" />
+
             <TextView
                 android:id="@+id/multiplier_to_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="240"
-                android:textColor="@android:color/background_light"
-                android:textSize="@dimen/font_size_16sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/x"
+                tools:text="240"
                 android:textColor="@android:color/background_light"
                 android:textSize="@dimen/font_size_16sp" />
         </LinearLayout>
@@ -62,7 +65,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <io.github.brulex.bridge.CustomViewPager
         android:id="@+id/scoring_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

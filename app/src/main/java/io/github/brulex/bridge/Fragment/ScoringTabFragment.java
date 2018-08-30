@@ -3,33 +3,81 @@ package io.github.brulex.bridge.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import io.github.brulex.bridge.DataTransferObject.DatabaseHandler;
+import java.util.ArrayList;
+
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
 import io.github.brulex.bridge.DataTransferObject.Player;
 import io.github.brulex.bridge.R;
 
 public class ScoringTabFragment extends AbstractFragment {
 
+    public static final String TAG = "ScoringTabFragment";
     private TextView totalPoints;
     private TextView seekBar_the6_text, seekBar_the7_text, seekBar_the8_text, seekBar_the9_text, seekBar_the10_text;
     private TextView seekBar_jack_text, seekBar_sjack_text, seekBar_queen_text, seekBar_squeen_text, seekBar_king_text, seekBar_ace_text;
     private SeekBar seekBar_the6, seekBar_the7, seekBar_the8, seekBar_the9, seekBar_the10, seekBar_jack, seekBar_sjack,
             seekBar_queen, seekBar_squeen, seekBar_king, seekBar_ace;
-    public static final String TAG = "ScoringTabFragment";
-
-
     private GameSetting gS;
     private Player player;
     private int newPoints;
     private int mult;
+    private final SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            switch (seekBar.getId()) {
+                case R.id.seekBar_the6:
+                    updateSeekBarText(seekBar_the6_text, seekBar);
+                    break;
+                case R.id.seekBar_the7:
+                    updateSeekBarText(seekBar_the6_text, seekBar);
+                    break;
+                case R.id.seekBar_the8:
+                    updateSeekBarText(seekBar_the8_text, seekBar);
+                    break;
+                case R.id.seekBar_the9:
+                    updateSeekBarText(seekBar_the9_text, seekBar);
+                    break;
+                case R.id.seekBar_the10:
+                    updateSeekBarText(seekBar_the10_text, seekBar);
+                    break;
+                case R.id.seekBar_jack:
+                    updateSeekBarText(seekBar_jack_text, seekBar);
+                    break;
+                case R.id.seekBar_sjack:
+                    updateSeekBarText(seekBar_sjack_text, seekBar);
+                    break;
+                case R.id.seekBar_queen:
+                    updateSeekBarText(seekBar_queen_text, seekBar);
+                    break;
+                case R.id.seekBar_squeen:
+                    updateSeekBarText(seekBar_squeen_text, seekBar);
+                    break;
+                case R.id.seekBar_king:
+                    updateSeekBarText(seekBar_king_text, seekBar);
+                    break;
+                case R.id.seekBar_ace:
+                    updateSeekBarText(seekBar_ace_text, seekBar);
+                    break;
+            }
+            update_points();
+        }
+    };
 
     public ScoringTabFragment() {
     }
@@ -102,58 +150,6 @@ public class ScoringTabFragment extends AbstractFragment {
         return view;
     }
 
-    private final SeekBar.OnSeekBarChangeListener seekBarListener = new SeekBar.OnSeekBarChangeListener() {
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            switch (seekBar.getId()) {
-                case R.id.seekBar_the6:
-                    updateSeekBarText(seekBar_the6_text, seekBar);
-                    break;
-                case R.id.seekBar_the7:
-                    updateSeekBarText(seekBar_the6_text, seekBar);
-                    break;
-                case R.id.seekBar_the8:
-                    updateSeekBarText(seekBar_the8_text, seekBar);
-                    break;
-                case R.id.seekBar_the9:
-                    updateSeekBarText(seekBar_the9_text, seekBar);
-                    break;
-                case R.id.seekBar_the10:
-                    updateSeekBarText(seekBar_the10_text, seekBar);
-                    break;
-                case R.id.seekBar_jack:
-                    updateSeekBarText(seekBar_jack_text, seekBar);
-                    break;
-                case R.id.seekBar_sjack:
-                    updateSeekBarText(seekBar_sjack_text, seekBar);
-                    break;
-                case R.id.seekBar_queen:
-                    updateSeekBarText(seekBar_queen_text, seekBar);
-                    break;
-                case R.id.seekBar_squeen:
-                    updateSeekBarText(seekBar_squeen_text, seekBar);
-                    break;
-                case R.id.seekBar_king:
-                    updateSeekBarText(seekBar_king_text, seekBar);
-                    break;
-                case R.id.seekBar_ace:
-                    updateSeekBarText(seekBar_ace_text, seekBar);
-                    break;
-            }
-            update_points();
-        }
-    };
-
     private SeekBar init_seekBar(int id) {
         SeekBar seekBar = view.findViewById(id);
         seekBar.setProgress(0);
@@ -193,8 +189,14 @@ public class ScoringTabFragment extends AbstractFragment {
         text.setText(String.valueOf(seekBar.getProgress()));
     }
 
-    public Player getDataFormSeekBar() {
+    public Player submitDataFormSeekBar() {
         player.setPoints(newPoints);
         return player;
+    }
+    public ArrayList<Player> getPoints() {
+        ArrayList<Player> list = new ArrayList<>();
+        list.add(player);
+        list.add(new Player(-1,-1,player.getNickname(),newPoints));
+        return list;
     }
 }

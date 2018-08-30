@@ -19,10 +19,8 @@ public class ScoringTabAdapter extends FragmentPagerAdapter {
 
     private Map<Integer, ScoringTabFragment> tabs;
     private final ArrayList<ScoringTabFragment> fragments;
-Context ss;
     public ScoringTabAdapter(Context context, FragmentManager fm, GameSetting gameSetting, int mult) {
         super(fm);
-        ss = context;
         fragments = new ArrayList<>();
         for (Player i : gameSetting.getPlayers()) {
             fragments.add(ScoringTabFragment.getInstance(context, i, gameSetting, mult));
