@@ -111,7 +111,7 @@ public class ScoringTabFragment extends AbstractFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_scoring_item, container, false);
         if (savedInstanceState != null) {
             newPoints = savedInstanceState.getInt("new_points");
@@ -193,10 +193,11 @@ public class ScoringTabFragment extends AbstractFragment {
         player.setPoints(newPoints);
         return player;
     }
+
     public ArrayList<Player> getPoints() {
         ArrayList<Player> list = new ArrayList<>();
         list.add(player);
-        list.add(new Player(-1,-1,player.getNickname(),newPoints));
+        list.add(new Player(-1, -1, player.getNickname(), newPoints));
         return list;
     }
 }

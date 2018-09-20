@@ -21,6 +21,30 @@ public class RuleTabMenuFragment extends AbstractFragment {
     private EditText cost_the6, cost_the7, cost_the8, cost_the9, cost_the10;
     private EditText cost_Jack, cost_SJack, cost_Queen, cost_SQueen, cost_King, cost_Ace;
     private LinearLayout lower_fields, setting_cost_fields;
+    private final View.OnClickListener onCheckBoxClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.flag_lower:
+                    lower_fields.setVisibility(flag_lower.isChecked() ? View.VISIBLE : View.GONE);
+                    break;
+                case R.id.flag_spadesOfJack:
+                    cost_SJack.setVisibility(flag_sJack.isChecked() ? View.VISIBLE : View.GONE);
+                    break;
+                case R.id.flag_spadesOfQueen:
+                    cost_SQueen.setVisibility(flag_sQueen.isChecked() ? View.VISIBLE : View.GONE);
+                    break;
+                case R.id.setting_cost:
+                    setting_cost_fields.setVisibility(setting_cost.isChecked() ? View.VISIBLE : View.GONE);
+                    break;
+                case R.id.flag_changeMode:
+                    //TODO
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     public static RuleTabMenuFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -88,27 +112,27 @@ public class RuleTabMenuFragment extends AbstractFragment {
         flag_changeMode = view.findViewById(R.id.flag_changeMode);
         setting_cost = view.findViewById(R.id.setting_cost);
         cost_the6 = view.findViewById(R.id.cost_the6);
-        cost_the6.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_6,0,0,0);
+        cost_the6.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_6, 0, 0, 0);
         cost_the7 = view.findViewById(R.id.cost_the7);
-        cost_the7.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_7,0,0,0);
+        cost_the7.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_7, 0, 0, 0);
         cost_the8 = view.findViewById(R.id.cost_the8);
-        cost_the8.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_8,0,0,0);
+        cost_the8.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_8, 0, 0, 0);
         cost_the9 = view.findViewById(R.id.cost_the9);
-        cost_the9.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_9,0,0,0);
+        cost_the9.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_9, 0, 0, 0);
         cost_the10 = view.findViewById(R.id.cost_the10);
-        cost_the10.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_10,0,0,0);
+        cost_the10.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_10, 0, 0, 0);
         cost_Jack = view.findViewById(R.id.cost_Jack);
-        cost_Jack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_j,0,0,0);
+        cost_Jack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_j, 0, 0, 0);
         cost_SJack = view.findViewById(R.id.cost_spadesOfJack);
-        cost_SJack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sj,0,0,0);
+        cost_SJack.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sj, 0, 0, 0);
         cost_Queen = view.findViewById(R.id.cost_Queen);
-        cost_Queen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_q,0,0,0);
+        cost_Queen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_q, 0, 0, 0);
         cost_SQueen = view.findViewById(R.id.cost_SpadesOfQueen);
-        cost_SQueen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sq,0,0,0);
+        cost_SQueen.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_sq, 0, 0, 0);
         cost_King = view.findViewById(R.id.cost_King);
-        cost_King.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_k,0,0,0);
+        cost_King.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_k, 0, 0, 0);
         cost_Ace = view.findViewById(R.id.cost_Ace);
-        cost_Ace.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_a,0,0,0);
+        cost_Ace.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_a, 0, 0, 0);
         lower_fields = view.findViewById(R.id.cost_lower);
         setting_cost_fields = view.findViewById(R.id.setting_cost_fields);
         return view;
@@ -156,29 +180,4 @@ public class RuleTabMenuFragment extends AbstractFragment {
         flag_changeMode.setOnClickListener(onCheckBoxClick);
         setting_cost.setOnClickListener(onCheckBoxClick);
     }
-
-    private final View.OnClickListener onCheckBoxClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.flag_lower:
-                    lower_fields.setVisibility(flag_lower.isChecked() ? View.VISIBLE : View.GONE);
-                    break;
-                case R.id.flag_spadesOfJack:
-                    cost_SJack.setVisibility(flag_sJack.isChecked() ? View.VISIBLE : View.GONE);
-                    break;
-                case R.id.flag_spadesOfQueen:
-                    cost_SQueen.setVisibility(flag_sQueen.isChecked() ? View.VISIBLE : View.GONE);
-                    break;
-                case R.id.setting_cost:
-                    setting_cost_fields.setVisibility(setting_cost.isChecked() ? View.VISIBLE : View.GONE);
-                    break;
-                case R.id.flag_changeMode:
-                    //TODO
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 }

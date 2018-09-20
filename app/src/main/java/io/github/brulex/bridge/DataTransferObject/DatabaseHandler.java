@@ -188,11 +188,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null) {
             cursor.moveToFirst();
-                return new Player(
-                        cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_PLAYER)),
-                        cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_SETTING)),
-                        getString(cursor, Constants.KEY_NICKNAME),
-                        getInt(cursor, Constants.KEY_POINTS));
+            return new Player(
+                    cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_PLAYER)),
+                    cursor.getLong(cursor.getColumnIndex(Constants.KEY_I_SETTING)),
+                    getString(cursor, Constants.KEY_NICKNAME),
+                    getInt(cursor, Constants.KEY_POINTS));
         }
         return null;
     }
@@ -204,31 +204,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateForNewRound(ArrayList<Player> newPoints, long i_setting, int current_round){
+    public void updateForNewRound(ArrayList<Player> newPoints, long i_setting, int current_round) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Constants.KEY_CURRENT_ROUND, current_round + 1);
         db.update(Constants.TABLE_GAME_RULE, values,
-                Constants.KEY_I_SETTING + "=" + i_setting,null);
-        for (Player i: newPoints) {
+                Constants.KEY_I_SETTING + "=" + i_setting, null);
+        for (Player i : newPoints) {
             values.clear();
             values.put(Constants.KEY_POINTS, i.getPoints());
             db.update(Constants.TABLE_PLAYERS, values,
-                    Constants.KEY_I_PLAYER + "=" + i.getI_player(),null);
+                    Constants.KEY_I_PLAYER + "=" + i.getI_player(), null);
         }
         db.close();
     }
 
-    public void resetGame(long i_setting){
+    public void resetGame(long i_setting) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Constants.KEY_CURRENT_ROUND, 1);
         db.update(Constants.TABLE_GAME_RULE, values,
-                Constants.KEY_I_SETTING + "=" + i_setting,null);
+                Constants.KEY_I_SETTING + "=" + i_setting, null);
         values.clear();
         values.put(Constants.KEY_POINTS, 0);
         db.update(Constants.TABLE_PLAYERS, values,
-                Constants.KEY_I_SETTING + "=" + i_setting,null);
+                Constants.KEY_I_SETTING + "=" + i_setting, null);
         db.close();
     }
 }

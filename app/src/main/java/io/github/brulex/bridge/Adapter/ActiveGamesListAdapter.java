@@ -22,6 +22,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
     private final ArrayList<GameSetting> mData;
     private final LayoutInflater mInflater;
     private Context context;
+    private boolean flag;
 
     public ActiveGamesListAdapter(Context context, ArrayList<GameSetting> data) {
         this.mInflater = LayoutInflater.from(context);
@@ -37,8 +38,9 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position)  {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         GameSetting gameSetting = mData.get(position);
+        flag = true;
         holder.game_name.setText(gameSetting.getGame_name());
         holder.current_round.setText(String.valueOf(gameSetting.getCurrent_round()));
         holder.player_cnt.setText(String.valueOf(gameSetting.getPlayers().size()));
@@ -46,6 +48,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
         holder.delete_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.itemView.setClickable(false);
                 DatabaseHandler db = new DatabaseHandler(context);
                 int pos = holder.getAdapterPosition();
                 db.deleteGameSetting(mData.get(pos).getI_setting());
@@ -58,7 +61,7 @@ public class ActiveGamesListAdapter extends RecyclerView.Adapter<ActiveGamesList
             public void onClick(View view) {
                 int pos = holder.getAdapterPosition();
                 Intent game = new Intent(context, GameProcessActivity.class);
-                game.putExtra("i_setting",mData.get(pos).getI_setting());
+                game.putExtra("i_setting", mData.get(pos).getI_setting());
                 context.startActivity(game);
             }
         });

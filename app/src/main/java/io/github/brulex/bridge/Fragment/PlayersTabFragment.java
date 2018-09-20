@@ -40,7 +40,7 @@ public class PlayersTabFragment extends AbstractFragment implements PlayerListAd
                     .setPositiveButton("Save",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    players.add(new Player(-1,-1,userInput.getText().toString(), 0));
+                                    players.add(new Player(-1, -1, userInput.getText().toString(), 0));
                                     adapter.notifyItemInserted(players.size());
                                     recyclerView.scrollToPosition(players.size());
                                 }
@@ -91,7 +91,7 @@ public class PlayersTabFragment extends AbstractFragment implements PlayerListAd
             List<String> temp = savedInstanceState.getStringArrayList("players");
             assert temp != null;
             for (String i : temp) {
-                players.add(new Player(-1,-1,i, 0));
+                players.add(new Player(-1, -1, i, 0));
             }
         }
 

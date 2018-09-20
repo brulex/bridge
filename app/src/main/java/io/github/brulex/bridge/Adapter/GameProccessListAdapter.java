@@ -17,13 +17,10 @@ public class GameProccessListAdapter extends RecyclerView.Adapter<GameProccessLi
 
     private final ArrayList<Player> mData;
     private final LayoutInflater mInflater;
-    private Context context;
-    private ViewHolder viewHolder;
 
     public GameProccessListAdapter(Context context, ArrayList<Player> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
-        this.context = context;
     }
 
     @NonNull

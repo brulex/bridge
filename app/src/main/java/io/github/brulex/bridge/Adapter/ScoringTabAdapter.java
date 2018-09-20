@@ -1,10 +1,8 @@
 package io.github.brulex.bridge.Adapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,13 +10,13 @@ import java.util.Map;
 
 import io.github.brulex.bridge.DataTransferObject.GameSetting;
 import io.github.brulex.bridge.DataTransferObject.Player;
-import io.github.brulex.bridge.Fragment.AbstractFragment;
 import io.github.brulex.bridge.Fragment.ScoringTabFragment;
 
 public class ScoringTabAdapter extends FragmentPagerAdapter {
 
     private Map<Integer, ScoringTabFragment> tabs;
     private final ArrayList<ScoringTabFragment> fragments;
+
     public ScoringTabAdapter(Context context, FragmentManager fm, GameSetting gameSetting, int mult) {
         super(fm);
         fragments = new ArrayList<>();
